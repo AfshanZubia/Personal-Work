@@ -2,14 +2,14 @@
                 "FirstName": "Afshan",
                 "Lastname": "Akmal",
                 "Company": "NJIT",
-                "Address": "35 Clark Avenue",
+                "Address": "1234 Main Street",
                 "City": "Edison",
                 "State": "NJ",
                 "Country": "USA",
-                "PostalCode": "08817",
-                "Phone": "848-668-3611",
+                "PostalCode": "09876",
+                "Phone": "123-456-7890",
                 "Fax": "idk",
-                "Email": "afshanzubia.akmal05@gmail.com",
+                "Email": "njit_student@njit.edu",
                 "SupportRepId": "idkeither"
         
 }

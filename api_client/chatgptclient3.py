@@ -24,6 +24,5 @@ class OpenAIResponseGenerator3():
                         "messages": [{"role": "system", "content": "You are a helpful assistant."},{"role": "user", "content": f"{prompt}"}],
 			"max_tokens": 100
 		}
-		data = json.dumps(body)
-		response = requests.post(self.url, headers=self.headers, data=data)
-		return response.json()
+		response = requests.post(self.url, headers=self.headers, data=body)
+		return response.choices[0].message['content'].strip()

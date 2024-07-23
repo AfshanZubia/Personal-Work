@@ -16,8 +16,20 @@ logger.info("Generate one customer row:")
 new = CustomerClient('localhost', 8000)
 logger.info(new.generateOneCustomer())
 
+row1 = {
+		'FirstName': 'Afshan',
+		'Lastname': 'Akmal',
+		'Company': 'NJIT',
+		'Address': '35 Clark Avenue',
+		'City': 'Edison',
+		'State': 'NJ',
+		'Country': 'USA',
+		'PostalCode': '08817',
+		'Phone': '848-668-3611',
+		'Fax': 'idk',
+		'Email': 'afshanzubia.akmal05@gmail.com',
+		'SupportRepId': 'idkeither'
+	}
+
 logger.info("Add a new row.")
-file = open('data.json', 'r')
-data = json.load(file)
-logger.info(new.addCustomer(data))
-file.close()
+logger.info(new.addCustomer(row1))

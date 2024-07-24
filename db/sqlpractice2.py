@@ -63,6 +63,7 @@ class CustomersTableQueryWithCaching(CustomersTableQuery):
 		return customer_list
 					
 	def getCustomersByFirstName(self, customer_name):
+		#super.getCustomersByFirstName(customer_name)
 		#First, you would iterate over self.cache to check and see if there are any matching rows there. Next, you would 
 		
 		customer_list = []
@@ -72,3 +73,5 @@ class CustomersTableQueryWithCaching(CustomersTableQuery):
 		return customer_list
 '''
 			
+	def insertCustomers(self, dict1):
+		super.insertCustomers(dict1)

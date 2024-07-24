@@ -42,4 +42,33 @@ class CustomersTableQuery:
 		for row in rows:
 			customerslist.append(row)
 		return customerslist
+
+
+'''
+
+class CustomersTableQueryWithCaching(CustomersTableQuery):
+	def __init__(self):
+		super().__init__()
+		self.cache = []
+	
+	def getCustomers(self, count):
+		if not self.cache:
+		#	initialize_cache() -->checks if not self.cache  does all the loading
+		#		if its already initailzed it does nothing
+		# put in all methods 
+			self.cache.append(super.getCustomers(count)
+		customer_list = []
+		for i in range(count):
+			customer_list.append(self.cache[i])
+		return customer_list
+					
+	def getCustomersByFirstName(self, customer_name):
+		#First, you would iterate over self.cache to check and see if there are any matching rows there. Next, you would 
+		
+		customer_list = []
+		for row in self.cache:
+			if row[1] == customer_name:
+				customer_list.append(row)
+		return customer_list
+'''
 			

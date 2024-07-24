@@ -31,5 +31,5 @@ class CustomerClient():
 		response = requests.post(self.url, json=customers)
 		return (f'Status Code: {response.status_code}')
 
-		
+
 

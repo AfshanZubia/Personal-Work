@@ -27,9 +27,10 @@ class OpenAIResponseGenerator3():
 			}
 			response = requests.post(self.url, headers=self.headers, data=body)
 			return response.choices[0].message['content'].strip()
-		except requests.exceptions.RequestException as e:
-			logger.error(f"Request failed: {e}")
+		except requests.exceptions.HTTPError as e:
+			logger.error(f"Request failed. Status code: {response.status_code}")
+			logger.error(f"Error: {e}")
 			return None
-		except Exception as e:
-			logger.error(f"An unexpected error occured: {e}")
+		except Exception as err:
+			logger.error(f"An unexpected error occured: {err}")
 			return None

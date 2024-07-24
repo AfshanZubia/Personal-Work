@@ -16,6 +16,10 @@ class CustomersTableQuery:
 		self.cursor = self.con.cursor()
 
 	def getCustomers(self, count):
+		if count == 0:
+			return None 	
+		elif count <0:
+			return "Please return a valid number above 0 for count."
 		customerslist = []
 		query = f"SELECT * FROM customers LIMIT {count};"
 		self.cursor.execute(query)
@@ -52,17 +56,18 @@ class CustomersTableQueryWithCaching(CustomersTableQuery):
 		self.cache = []
 	
 	def getCustomers(self, count):
-		if not self.cache:
-		#	initialize_cache() -->checks if not self.cache  does all the loading
-		#		if its already initailzed it does nothing
-		# put in all methods 
-			self.cache.append(super.getCustomers(count)
+		initialize_cache()
+		if count == 0:
+			return None
+		elif count <0:
+			return "Please return a valid number for count."
 		customer_list = []
 		for i in range(count):
 			customer_list.append(self.cache[i])
 		return customer_list
 					
 	def getCustomersByFirstName(self, customer_name):
+		initialize_cache()
 		#super.getCustomersByFirstName(customer_name)
 		#First, you would iterate over self.cache to check and see if there are any matching rows there. Next, you would 
 		
@@ -71,7 +76,16 @@ class CustomersTableQueryWithCaching(CustomersTableQuery):
 			if row[1] == customer_name:
 				customer_list.append(row)
 		return customer_list
-'''
 			
 	def insertCustomers(self, dict1):
+		initialize_cache()
 		super.insertCustomers(dict1)
+	
+	def initialize_cache(self):
+		if not self.cache:
+			query = "SELECT * FROM customers;"
+			self.cursor.execute(query)
+                	rows = self.cursor.fetchall()
+			for row in rows:
+				self.cache.append(row)
+'''	

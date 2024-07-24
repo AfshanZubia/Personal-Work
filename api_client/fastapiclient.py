@@ -14,22 +14,43 @@ class CustomerClient():
 		self.url = f"http://{hostname}:{port}/Customers?count=1"
 
 	def generateOneCustomer(self):
-		text = requests.get(self.url)
+		try: 
+			text = requests.get(self.url)
+			if text.status_code == 200:	
+				return text.json()
+			else:
+				logger.error(f"Unexpected status code: {text.status_code}")
+				return None 	
+		except requests.exceptions.RequestException as e:
+			logger.error(f"Request failed: {e}")
+			return None
 		
-		return text.json()
-
 	def generateMultipleCustomers(self, number):
-		l = []
-		for i in range(number):
-			
+		try:	
+			l = []
+			for i in range(number):
 				text = requests.get(self.url)
-
-				l.append(text.json())
-
-		return l
+				if text.status_code == 200:
+					l.append(text.json())
+				else:
+					logger.error(f"Unexpected status code: {text.status_code}")
+					return None 
+			return l
+		except requests.exceptions.RequestException as e:
+			logger.error(f"Request failed: {e}")
+			return None
+	
 	def addCustomer(self, customers):
-		response = requests.post(self.url, json=customers)
-		return (f'Status Code: {response.status_code}')
+		try:
+			response = requests.post(self.url, json=customers)
+			if response.status_code == 200:
+				return (f'Status Code: {response.status_code}')
+			else:
+				logger.error(f"Unexpected status code: {response.status_code}")
+				return None 
+		except requests.exceptions.RequestException as e:
+			logger.error(f"Request failed: {e}")
+			return None
 
 
 

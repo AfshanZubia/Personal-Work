@@ -27,7 +27,7 @@ class CustomersTableQuery:
 		self.cursor.execute(query)
 		rows = self.cursor.fetchall()
 		for row in rows:
-        	customerslist.append(row)
+			customerslist.append(row)
 		return customerslist
 
 	def insertCustomers(self, dict1):

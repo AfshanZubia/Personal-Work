@@ -20,7 +20,7 @@ class CustomersTableQuery:
 			return None 	
 		elif count <0:
 			return "Please return a valid number above 0 for count."
-		elif not count.isdigit():
+		elif not isinstance(count, int):
 			return "Please return a valid number and not a string." 
 		customerslist = []
 		query = f"SELECT * FROM customers LIMIT {count};"

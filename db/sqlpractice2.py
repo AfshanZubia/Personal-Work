@@ -20,12 +20,14 @@ class CustomersTableQuery:
 			return None 	
 		elif count <0:
 			return "Please return a valid number above 0 for count."
+		elif not count.isdigit():
+			return "Please return a valid number and not a string." 
 		customerslist = []
 		query = f"SELECT * FROM customers LIMIT {count};"
 		self.cursor.execute(query)
 		rows = self.cursor.fetchall()
 		for row in rows:
-        		customerslist.append(row)
+        	customerslist.append(row)
 		return customerslist
 
 	def insertCustomers(self, dict1):
@@ -47,7 +49,14 @@ class CustomersTableQuery:
 			customerslist.append(row)
 		return customerslist
 
-
+	def selectAllCustomers(self):
+		query = f"SELECT * FROM Customers;"
+		all_customers = []
+		self.cursor.execute(query)
+		rows = self.cursor.fetchall()
+		for row in rows:
+			customerlist.append(row)	
+		return all_customers
 '''
 
 class CustomersTableQueryWithCaching(CustomersTableQuery):
@@ -83,9 +92,7 @@ class CustomersTableQueryWithCaching(CustomersTableQuery):
 	
 	def initialize_cache(self):
 		if not self.cache:
-			query = "SELECT * FROM customers;"
-			self.cursor.execute(query)
-                	rows = self.cursor.fetchall()
-			for row in rows:
-				self.cache.append(row)
-'''	
+			items = super.selectAllCustomers()
+			for item in items:
+				self.cache.append(item)
+'''		
